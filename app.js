@@ -12,7 +12,8 @@ const defs={
  clinic:{name:'Клиника',icon:'✚',cost:1000,desc:'Улучшает здоровье и качество жизни.',jobs:8,health:9,maint:20},
  power:{name:'Электростанция',icon:'ϟ',cost:1400,desc:'Обеспечивает электричеством производственные здания и будущие районы.',jobs:5,powerSupply:12,maint:32}
 };
-const zoneColors={residential:'#9bdc70',commercial:'#e8bf68',industrial:'#df8d72'};\nconst colors={road:'#78877b',house:'#8fcf70',shop:'#e8bf68',factory:'#df8d72',park:'#72b987',school:'#83b7df',clinic:'#e38c9b',power:'#c3a0e8'};
+const zoneColors={residential:'#9bdc70',commercial:'#e8bf68',industrial:'#df8d72'};
+const colors={road:'#78877b',house:'#8fcf70',shop:'#e8bf68',factory:'#df8d72',park:'#72b987',school:'#83b7df',clinic:'#e38c9b',power:'#c3a0e8'};
 let state,selected={x:5,y:5},tool='select',zoom=1,paused=false,monthTimer=null;
 const $=id=>document.getElementById(id);
 const svg=$('cityMap');
