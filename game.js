@@ -4,6 +4,8 @@ import {saveGame,loadGame} from "./save.js";
 const loaded=loadGame();
 const state=loaded||{world:createWorld(),month:1,year:1,season:0,gold:240,wood:90,stone:55,food:65,grain:0,flour:0,bread:0,population:8,happiness:76,selected:null};
 if(!loaded){state.world[40].building="cottage";state.world[39].building="cottage";state.world[41].building="road";}
+// WHY: migration gives older saved settlements a connected starter road, so their existing homes remain operational.
+if(!state.world.some(tile=>tile.building==="road")){[30,31,32,41].forEach(id=>{if(state.world[id]&&!state.world[id].building)state.world[id].building="road";});}
 for(const key of ["grain","flour","bread"])state[key]??=0;
 const $=id=>document.getElementById(id),seasons=["Весна","Лето","Осень","Зима"],seasonEvents=[["Тихое начало","Первые поселенцы обживаются у реки. Им нужны крыша над головой и надёжный источник еды."],["Тёплые дни","Длинные дни помогают фермерам и строителям."],["Золотая пора","Купцы начинают чаще заглядывать в долину. Подготовьте запасы к холодам."],["Первый снег","Зимой фермы дают меньше зерна. Позаботьтесь о запасах заранее."]];let category="all",toastTimer;
 function notify(message){const el=$("toast");el.textContent=message;el.classList.add("show");clearTimeout(toastTimer);toastTimer=setTimeout(()=>el.classList.remove("show"),2300);}
