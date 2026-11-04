@@ -1,0 +1,1 @@
+const KEY="eldoria.save.v1";export function saveGame(state){try{localStorage.setItem(KEY,JSON.stringify(state));return true;}catch(error){console.warn("Save failed",error);return false;}}export function loadGame(){try{const raw=localStorage.getItem(KEY);return raw?JSON.parse(raw):null;}catch(error){console.warn("Save load failed",error);return null;}}
