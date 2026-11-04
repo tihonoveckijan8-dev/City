@@ -1,91 +1,18 @@
 <!doctype html>
 <html lang="ru">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="theme-color" content="#101714">
-<meta name="description" content="METROPOLIS — изометрический симулятор развития собственного города.">
-<meta name="application-name" content="METROPOLIS">
-<link rel="manifest" href="./manifest.webmanifest">
-<link rel="icon" href="./icon.svg" type="image/svg+xml">
-<title>METROPOLIS — City Builder</title>
-<link rel="stylesheet" href="./style.css">
-</head>
-<body>
-<div class="app">
-<header class="topbar">
-  <div class="brand"><div class="brand-mark">M</div><div><div class="brand-name">METROPOLIS</div><div class="brand-sub">CITY BUILDER · YOUR STORY</div></div></div>
-  <div class="top-actions"><button class="city-name" id="cityNameBtn" title="Переименовать город">Новая Заря ✎</button><button class="speed-btn" id="pauseBtn">Ⅱ Пауза</button><button class="icon-btn" id="saveBtn" title="Сохранить">↧</button><button class="icon-btn" id="resetBtn" title="Новая игра">↻</button></div>
-</header>
-<section class="stats" aria-label="Показатели города">
-  <div class="stat"><div class="stat-head">Бюджет <span class="stat-icon">◈</span></div><div class="stat-value" id="moneyStat">12 500 <small>₡</small></div></div>
-  <div class="stat"><div class="stat-head">Население <span class="stat-icon">♟</span></div><div class="stat-value" id="popStat">120 <small>чел.</small></div></div>
-  <div class="stat"><div class="stat-head">Счастье <span class="stat-icon">✳</span></div><div class="stat-value" id="happinessStat">76<small>%</small></div></div>
-  <div class="stat"><div class="stat-head">Баланс / месяц <span class="stat-icon">↗</span></div><div class="stat-value positive" id="balanceStat">+₡ 0</div></div>
-  <div class="stat"><div class="stat-head">Месяц <span class="stat-icon">◷</span></div><div class="stat-value" id="dateStat">Март · 2026</div></div>
-</section>
-<main class="layout">
-  <aside class="panel left-panel">
-    <div class="section-label">Строительство</div>
-    <div class="tool-list" id="toolList">
-      <button class="tool active" data-type="select"><span class="tool-emoji">⌖</span><span class="tool-copy"><strong>Выбор</strong><small>Осмотреть участок</small></span></button>
-      <button class="tool" data-type="road"><span class="tool-emoji">〰</span><span class="tool-copy"><strong>Дорога</strong><small>₡ 35 за клетку</small></span></button>
-      <button class="tool" data-type="house"><span class="tool-emoji">⌂</span><span class="tool-copy"><strong>Жильё</strong><small>₡ 420 · +24 места</small></span></button>
-      <button class="tool" data-type="shop"><span class="tool-emoji">▣</span><span class="tool-copy"><strong>Магазин</strong><small>₡ 650 · рабочие места</small></span></button>
-      <button class="tool" data-type="factory"><span class="tool-emoji">▥</span><span class="tool-copy"><strong>Фабрика</strong><small>₡ 1 100 · производство</small></span></button>
-      <button class="tool" data-type="park"><span class="tool-emoji">♣</span><span class="tool-copy"><strong>Парк</strong><small>₡ 300 · счастье</small></span></button>
-      <button class="tool" data-type="school"><span class="tool-emoji">▤</span><span class="tool-copy"><strong>Школа</strong><small>₡ 900 · образование</small></span></button>
-      <button class="tool" data-type="clinic"><span class="tool-emoji">✚</span><span class="tool-copy"><strong>Клиника</strong><small>₡ 1 000 · здоровье</small></span></button>
-      <button class="tool" data-type="power"><span class="tool-emoji">ϟ</span><span class="tool-copy"><strong>Электростанция</strong><small>₡ 1 400 · энергия</small></span></button>
-    </div>
-    <div class="tool-divider"></div>
-    <div class="section-label">Управление</div>
-    <div class="tool-list">
-      <div class="section-label" style="margin:4px 0 7px">Тип района</div>
-      <button class="tool active" data-zone-type="residential"><span class="tool-emoji">⌂</span><span class="tool-copy"><strong>Жилой</strong><small>Дома и население</small></span></button>
-      <button class="tool" data-zone-type="commercial"><span class="tool-emoji">▣</span><span class="tool-copy"><strong>Коммерческий</strong><small>Магазины и услуги</small></span></button>
-      <button class="tool" data-zone-type="industrial"><span class="tool-emoji">▥</span><span class="tool-copy"><strong>Промышленный</strong><small>Фабрики и рабочие места</small></span></button>
-      <button class="tool" id="zoneBtn" data-type="zone"><span class="tool-emoji">▦</span><span class="tool-copy"><strong>Разметить участок</strong><small>Выбери тип выше</small></span></button>
-      <button class="tool" id="demolishBtn" data-type="demolish"><span class="tool-emoji">⌫</span><span class="tool-copy"><strong>Снос</strong><small>Освободить участок</small></span></button>
-    </div>
-    <div class="left-tip"><b>Подсказка мэра</b><br>Соединяй здания дорогами. Жители любят парки, а бизнесу нужны покупатели и сотрудники.</div>
-  </aside>
-  <section class="panel map-panel">
-    <div class="map-toolbar"><div class="map-title">ПЛАН ГОРОДА <small id="mapMode">Режим: выбор участка</small></div><div class="map-tools"><button id="zoomOut">−</button><button id="zoomReset">100%</button><button id="zoomIn">+</button></div></div>
-    <div class="map-stage" id="mapStage">
-      <svg id="cityMap" viewBox="0 0 1000 650" role="img" aria-label="Интерактивная изометрическая карта города"></svg>
-      <div class="map-coords" id="coordLabel">СЕКТОР 01 · 01</div>
-      <div class="map-legend"><span><i class="legend-dot" style="background:#8fcf70"></i>Жилые</span><span><i class="legend-dot" style="background:#e8bf68"></i>Коммерция</span><span><i class="legend-dot" style="background:#df8d72"></i>Промышленность</span></div>
-    </div>
-    <div class="map-footer"><span>КЛИКНИ ПО КЛЕТКЕ, ЧТОБЫ СТРОИТЬ</span><span>РАЗМЕР ГОРОДА <b id="mapSize">12 × 12</b></span></div>
-  </section>
-  <aside class="panel right-panel">
-    <div class="inspector-head"><div class="inspector-title">Участок и объект</div><span class="tag" id="tileTag">ПУСТО</span></div>
-    <div class="selection-card">
-      <div class="selection-art" id="selectionArt">⌖</div>
-      <div class="selection-name" id="selectionName">Выбери участок</div>
-      <div class="selection-desc" id="selectionDesc">Нажми на клетку карты, чтобы посмотреть участок или разместить выбранное здание.</div>
-      <div class="detail-grid"><div class="detail"><small>Координаты</small><b id="tileCoords">—</b></div><div class="detail"><small>Содержание</small><b id="tileStatus">Свободно</b></div></div>
-    </div>
-    <button class="action-btn" id="mainAction" disabled>Выбери участок</button>
-    <button class="secondary-btn" id="upgradeBtn" disabled>Улучшить здание</button>
-    <div class="mini-section">
-      <div class="section-label">Городские службы</div>
-      <div class="mini-row"><span>Электричество</span><span id="powerLabel">0 / 0</span></div><div class="bar"><i id="powerBar" style="width:0%"></i></div>
-      <div class="mini-row"><span>Рабочие места</span><span id="jobsLabel">0 / 0</span></div><div class="bar"><i id="jobsBar" style="width:0%"></i></div>
-      <div class="mini-row"><span>Жильё</span><span id="homesLabel">0 / 0</span></div><div class="bar"><i id="homesBar" style="width:0%"></i></div><div class="mini-row"><span>Доступ к дороге</span><span id="roadAccessLabel">0 / 0</span></div><div class="bar"><i id="roadAccessBar" style="width:100%"></i></div><div class="mini-row"><span>Связанные дороги</span><span id="roadNetworkLabel">0 / 0</span></div><div class="mini-row"><span>Загруженность дорог</span><span id="trafficLabel">0% · Свободно</span></div><div class="bar traffic-track"><i id="trafficBar" style="width:0%"></i></div>
-    </div>
-    <div class="mini-section"><div class="section-label">Спрос на развитие</div>
-      <div class="mini-row"><span>Жилые районы</span><span id="residentialDemandValue">0%</span></div><div class="bar"><i id="residentialDemandBar" style="width:0%"></i></div>
-      <div class="mini-row"><span>Коммерция</span><span id="commercialDemandValue">0%</span></div><div class="bar"><i id="commercialDemandBar" style="width:0%"></i></div>
-      <div class="mini-row"><span>Промышленность</span><span id="industrialDemandValue">0%</span></div><div class="bar"><i id="industrialDemandBar" style="width:0%"></i></div>
-    </div>
-    <div class="mini-section"><div class="section-label">Последние события</div><div id="eventLog" style="font-size:10px;line-height:1.65;color:var(--muted)">Город основан. Время строить будущее.</div></div>
-  </aside>
-</main>
-</div>
-<div class="toast" id="toast" role="status"></div>
-<div class="modal-backdrop" id="nameModal"><div class="modal"><h2>Как назовём город?</h2><p>У каждого великого города есть имя. Его можно изменить в любой момент.</p><input id="nameInput" maxlength="24" value="Новая Заря"><div class="modal-actions"><button class="secondary-btn" id="cancelName">Отмена</button><button class="action-btn" id="confirmName">Сохранить</button></div></div></div>
-<script src="./app.js" defer></script>
-</body>
-</html>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#18251f"><meta name="description" content="ELDORIA — средневековый фэнтези-градостроитель">
+<meta name="application-name" content="ELDORIA"><link rel="manifest" href="./manifest.webmanifest"><link rel="icon" href="./icon.svg" type="image/svg+xml">
+<title>ELDORIA — Живое королевство</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Marcellus&display=swap" rel="stylesheet"><link rel="stylesheet" href="./style.css">
+</head><body><div class="app-shell">
+<header class="topbar"><a class="brand" href="#"><span class="brand-mark">✦</span><span><b>ELDORIA</b><small>ЖИВОЕ КОРОЛЕВСТВО</small></span></a><div class="realm-name"><span class="realm-dot"></span><span>Долина Серебряной Реки</span><span class="season-pill" id="season">Весна · I год</span></div><div class="top-actions"><button class="icon-button" id="saveButton" title="Сохранить город">↥</button><button class="avatar">Э</button></div></header>
+<main class="layout"><section class="world-panel"><div class="world-heading"><div><div class="eyebrow">ВАШЕ ВЛАДЕНИЕ</div><h1>Новый рассвет</h1><p>Небольшое поселение, которому суждено стать легендой.</p></div><div class="world-actions"><button class="soft-button" id="rotateButton">⟳ <span>Обзор</span></button><button class="primary-button" id="nextMonth">Следующий месяц <span>→</span></button></div></div>
+<div class="map-frame"><div class="map-topline"><span><i class="live-dot"></i> МИР ЖИВЁТ</span><span>СЕКТОР 01 · ДОЛИНА</span></div><div class="map-viewport"><div class="world-grid" id="worldGrid" aria-label="Карта города"></div></div><div class="map-legend"><span><i class="legend-dot grass"></i> Равнина</span><span><i class="legend-dot forest"></i> Лес</span><span><i class="legend-dot water"></i> Вода</span><span class="map-hint">Выберите постройку справа, затем участок карты</span></div></div>
+<div class="supply-line" id="supplyStatus">Зерно 0 · Мука 0 · Хлеб 0</div>
+<div class="bottom-stats"><article class="stat-card"><span class="stat-icon">⌂</span><div><small>НАСЕЛЕНИЕ</small><strong id="population">8</strong><em id="housing">8 мест жилья</em></div></article><article class="stat-card"><span class="stat-icon">♧</span><div><small>СЧАСТЬЕ</small><strong id="happiness">76%</strong><em>Настроение жителей</em></div></article><article class="stat-card"><span class="stat-icon">⚒</span><div><small>РАБОЧИЕ МЕСТА</small><strong id="jobs">2 / 8</strong><em>Занятость горожан</em></div></article><article class="stat-card"><span class="stat-icon">⌖</span><div><small>РЕПУТАЦИЯ</small><strong id="reputation">Поселение</strong><em>Ваше имя в этих землях</em></div></article></div></section>
+<aside class="right-rail"><section class="resource-panel"><div class="section-title"><div><div class="eyebrow">КАЗНА И ЗАПАСЫ</div><h2>Ресурсы</h2></div><span class="subtle">МЕСЯЧНЫЙ БАЛАНС</span></div><div class="resource-grid"><div class="resource"><span class="resource-symbol gold">◈</span><div><small>Золото</small><b id="gold">240</b><em id="goldDelta">+0 / мес.</em></div></div><div class="resource"><span class="resource-symbol wood">♜</span><div><small>Древесина</small><b id="wood">90</b><em>Материал</em></div></div><div class="resource"><span class="resource-symbol stone">⬡</span><div><small>Камень</small><b id="stone">55</b><em>Материал</em></div></div><div class="resource"><span class="resource-symbol food">❋</span><div><small>Провизия</small><b id="food">65</b><em id="foodStatus">Запасы провизии</em></div></div></div></section>
+<section class="build-panel"><div class="section-title"><div><div class="eyebrow">РАЗВИТИЕ ГОРОДА</div><h2>Строительство</h2></div><span class="build-count" id="buildCount">0 / 81</span></div><div class="build-tabs" role="tablist"><button class="build-tab active" data-category="all">Все</button><button class="build-tab" data-category="homes">Жильё</button><button class="build-tab" data-category="roads">Дороги</button><button class="build-tab" data-category="production">Дело</button><button class="build-tab" data-category="culture">Город</button></div><div class="building-list" id="buildingList"></div><div class="build-footer"><span id="selectedHint">Выберите сооружение для постройки</span><button class="cancel-build" id="cancelBuild">Отмена</button></div></section>
+<section class="event-card"><div class="event-emblem">✧</div><div><small>ВЕСТИ ДОЛИНЫ</small><b id="eventTitle">Тихое начало</b><p id="eventText">Первые поселенцы обживаются у реки. Им нужны крыша над головой и надёжный источник еды.</p></div></section></aside></main>
+<footer class="footer"><span>ELDORIA <i>·</i> PRE-ALPHA</span><span>Каждый великий город начинается с одного дома.</span><span id="saveStatus">Автосохранение включено</span></footer></div><div class="toast" id="toast" role="status" aria-live="polite"></div><script type="module" src="./game.js"></script></body></html>
