@@ -1,17 +1,26 @@
 # METROPOLIS — City Builder
 
-A standalone browser city-building game, independent from the previous strategy project.
+A standalone browser city-building game. The project is split into separate static files and can be published with GitHub Pages.
+
+## Project structure
+
+- `index.html` — page markup and app shell
+- `style.css` — all visual styles and responsive layout
+- `app.js` — game logic, map rendering, construction and simulation
+- `manifest.webmanifest` — installable web app metadata
+- `icon.svg` — application icon
+- `.nojekyll` — static hosting support for GitHub Pages
 
 ## Run locally
 
-Open `index.html` in a modern browser. No build step or server is required.
+Open `index.html` in a modern browser. No build tools or server are required.
 
-## Publish with GitHub Pages
+## Publish as a website with GitHub Pages
 
-1. Open repository Settings → Pages.
-2. Choose **Deploy from a branch**.
-3. Select `main` and `/ (root)`, then save.
-4. Open the Pages URL shown there after deployment completes.
+1. Open the repository **Settings → Pages**.
+2. Under **Build and deployment**, choose **Deploy from a branch**.
+3. Select branch `main` and folder `/ (root)`, then click **Save**.
+4. Wait for the Pages deployment to finish. GitHub will show the published website address in the same Pages section.
 
 ## Current prototype
 
@@ -22,4 +31,4 @@ Open `index.html` in a modern browser. No build step or server is required.
 - Upgrade and demolish buildings; rename the city.
 - Automatic browser save using `localStorage`.
 
-Saves are currently local to the browser and are not synchronized between devices. Transport networks, water, waste, zoning demand and deeper citizen simulation are planned for later iterations.
+Saves are local to the browser/device and are not synchronized between devices yet. Deeper zoning demand, transport networks, water, waste and citizen simulation are planned for future updates.
