@@ -1,34 +1,31 @@
-# METROPOLIS — City Builder
+# ELDORIA — Живое королевство
 
-A standalone browser city-building game. The project is split into separate static files and can be published with GitHub Pages.
+Средневековый фэнтези-градостроитель: развивайте одно поселение от маленькой деревни до процветающего города.
 
-## Project structure
+## Структура проекта
 
-- `index.html` — page markup and app shell
-- `style.css` — all visual styles and responsive layout
-- `app.js` — game logic, map rendering, construction and simulation
-- `manifest.webmanifest` — installable web app metadata
-- `icon.svg` — application icon
-- `.nojekyll` — static hosting support for GitHub Pages
+- `index.html` — интерфейс игры и точка входа
+- `style.css` — оформление и адаптивная раскладка
+- `game.js` — строительство, экономика и симуляция месяцев
+- `world.js` — карта мира, участки и связность дорог
+- `buildings.js` — каталог зданий, стоимость и характеристики
+- `save.js` — локальное сохранение и загрузка
+- `manifest.webmanifest` — метаданные устанавливаемого веб-приложения
+- `icon.svg` — иконка ELDORIA
 
-## Run locally
+## Запуск
 
-Open `index.html` in a modern browser. No build tools or server are required.
+Откройте `index.html` в современном браузере или опубликуйте репозиторий через GitHub Pages. Проект использует JavaScript ES-модули, поэтому для локального запуска надёжнее использовать простой HTTP-сервер, например Live Server в VS Code.
 
-## Publish as a website with GitHub Pages
+## Текущие механики
 
-1. Open the repository **Settings → Pages**.
-2. Under **Build and deployment**, choose **Deploy from a branch**.
-3. Select branch `main` and folder `/ (root)`, then click **Save**.
-4. Wait for the Pages deployment to finish. GitHub will show the published website address in the same Pages section.
+- Изометрическая карта 9×9 с равнинами, лесом, водой и камнем.
+- Строительство жилья, дорог, ферм, производств, торговли и городских сооружений.
+- Дороги связывают здания с поселением; здания без дорожного доступа не работают.
+- Экономика: золото, древесина, камень и провизия.
+- Производственные цепочки: зерно → мука → хлеб.
+- Рабочие места, население, жильё и настроение жителей.
+- Смена месяцев и сезонов.
+- Автоматическое сохранение в браузере через localStorage.
 
-## Current prototype
-
-- Isometric 12×12 city map.
-- Place roads, homes, shops, factories, parks, schools, clinics and power stations.
-- Monthly budget simulation with taxes, building income and maintenance.
-- Population, housing capacity, happiness, jobs and electricity indicators.
-- Upgrade and demolish buildings; rename the city.
-- Automatic browser save using `localStorage`.
-
-Saves are local to the browser/device and are not synchronized between devices yet. Deeper zoning demand, transport networks, water, waste and citizen simulation are planned for future updates.
+Сохранения пока хранятся локально в браузере и не синхронизируются между устройствами.
