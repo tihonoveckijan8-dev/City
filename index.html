@@ -115,7 +115,7 @@ const colors={road:'#78877b',house:'#8fcf70',shop:'#e8bf68',factory:'#df8d72',pa
 let state,selected={x:5,y:5},tool='select',zoom=1,paused=false,monthTimer=null;
 const $=id=>document.getElementById(id);
 const svg=$('cityMap');
-function fresh(){let tiles=[];for(let y=0;y<H;y++)for(let x=0;x<W;x++)tiles.push({x,y,type:null,level:1,zone:null});return{city:'Новая Заря',money:12500,pop:120,happiness:76,month:2,year:2026,tiles,events:['Город основан. Время строить будущее.'],lastBalance:0,education:20,health:70};}
+function fresh(){let tiles=[];for(let y=0;y<H;y++)for(let x=0;x<W;x++)tiles.push({x,y,type:null,level:1,zone:null});const put=(x,y,type)=>{tiles[y*W+x].type=type};put(5,5,'house');put(6,5,'house');put(5,6,'road');put(6,6,'road');return{city:'Новая Заря',money:11500,pop:36,happiness:76,month:2,year:2026,tiles,events:['Первые жители поселились в двух домах. Город основан!'],lastBalance:0,education:20,health:70};}
 function load(){try{let raw=localStorage.getItem('metropolis-save-v1');if(!raw)return fresh();let s=JSON.parse(raw);if(!s||!Array.isArray(s.tiles)||s.tiles.length!==W*H)return fresh();return Object.assign(fresh(),s)}catch(e){return fresh()}}
 state=load();
 function save(silent){try{localStorage.setItem('metropolis-save-v1',JSON.stringify(state));if(!silent)toast('Город сохранён')}catch(e){toast('Не удалось сохранить игру')}}
