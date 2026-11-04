@@ -1,12 +1,12 @@
 {
-  "name": "METROPOLIS — City Builder",
-  "short_name": "METROPOLIS",
-  "description": "Изометрический симулятор развития собственного города.",
+  "name": "ELDORIA — Живое королевство",
+  "short_name": "ELDORIA",
+  "description": "Средневековый фэнтези-градостроитель.",
   "start_url": "./",
   "scope": "./",
   "display": "standalone",
-  "background_color": "#101714",
-  "theme_color": "#101714",
+  "background_color": "#18251f",
+  "theme_color": "#18251f",
   "icons": [
     {
       "src": "./icon.svg",
