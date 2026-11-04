@@ -41,7 +41,11 @@
     <div class="tool-divider"></div>
     <div class="section-label">Управление</div>
     <div class="tool-list">
-      <button class="tool" id="zoneBtn" data-type="zone"><span class="tool-emoji">▦</span><span class="tool-copy"><strong>Зонирование</strong><small>План развития</small></span></button>
+      <div class="section-label" style="margin:4px 0 7px">Тип района</div>
+      <button class="tool active" data-zone-type="residential"><span class="tool-emoji">⌂</span><span class="tool-copy"><strong>Жилой</strong><small>Дома и население</small></span></button>
+      <button class="tool" data-zone-type="commercial"><span class="tool-emoji">▣</span><span class="tool-copy"><strong>Коммерческий</strong><small>Магазины и услуги</small></span></button>
+      <button class="tool" data-zone-type="industrial"><span class="tool-emoji">▥</span><span class="tool-copy"><strong>Промышленный</strong><small>Фабрики и рабочие места</small></span></button>
+      <button class="tool" id="zoneBtn" data-type="zone"><span class="tool-emoji">▦</span><span class="tool-copy"><strong>Разметить участок</strong><small>Выбери тип выше</small></span></button>
       <button class="tool" id="demolishBtn" data-type="demolish"><span class="tool-emoji">⌫</span><span class="tool-copy"><strong>Снос</strong><small>Освободить участок</small></span></button>
     </div>
     <div class="left-tip"><b>Подсказка мэра</b><br>Соединяй здания дорогами. Жители любят парки, а бизнесу нужны покупатели и сотрудники.</div>
@@ -70,6 +74,11 @@
       <div class="mini-row"><span>Электричество</span><span id="powerLabel">0 / 0</span></div><div class="bar"><i id="powerBar" style="width:0%"></i></div>
       <div class="mini-row"><span>Рабочие места</span><span id="jobsLabel">0 / 0</span></div><div class="bar"><i id="jobsBar" style="width:0%"></i></div>
       <div class="mini-row"><span>Жильё</span><span id="homesLabel">0 / 0</span></div><div class="bar"><i id="homesBar" style="width:0%"></i></div>
+    </div>
+    <div class="mini-section"><div class="section-label">Спрос на развитие</div>
+      <div class="mini-row"><span>Жилые районы</span><span id="residentialDemandValue">0%</span></div><div class="bar"><i id="residentialDemandBar" style="width:0%"></i></div>
+      <div class="mini-row"><span>Коммерция</span><span id="commercialDemandValue">0%</span></div><div class="bar"><i id="commercialDemandBar" style="width:0%"></i></div>
+      <div class="mini-row"><span>Промышленность</span><span id="industrialDemandValue">0%</span></div><div class="bar"><i id="industrialDemandBar" style="width:0%"></i></div>
     </div>
     <div class="mini-section"><div class="section-label">Последние события</div><div id="eventLog" style="font-size:10px;line-height:1.65;color:var(--muted)">Город основан. Время строить будущее.</div></div>
   </aside>
